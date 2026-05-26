@@ -25,12 +25,11 @@ export default async function Home({ searchParams }: HomeProps) {
         <FilterBar filters={filters} />
         <div className="listing-list">
           {listings.data.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
+            <ListingCard key={listing.id} listing={listing} selected={filters.selected === listing.id} />
           ))}
         </div>
       </section>
-      <MapPanel listings={listings.data} />
+      <MapPanel listings={listings.data} selectedId={filters.selected} />
     </main>
   );
 }
-

@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Query } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
+import { CreateListingDto } from "./dto/create-listing.dto";
 import { ListingsQueryDto } from "./dto/listings-query.dto";
 import { ListingsService } from "./listings.service";
 
@@ -15,5 +16,9 @@ export class ListingsController {
   findById(@Param("id") id: string) {
     return this.listingsService.findById(id);
   }
-}
 
+  @Post()
+  create(@Body() payload: CreateListingDto) {
+    return this.listingsService.create(payload);
+  }
+}

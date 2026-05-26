@@ -7,4 +7,6 @@ coverage/
 .turbo/
 .tmp/
 *.log
-
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

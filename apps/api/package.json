@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nest start --watch",
+    "dev": "node --no-warnings ../../node_modules/@nestjs/cli/bin/nest.js start --watch",
     "build": "nest build",
-    "start": "node dist/main.js",
-    "test": "jest",
+    "start": "node --no-warnings dist/main.js",
+    "test": "node --no-warnings ../../node_modules/jest/bin/jest.js",
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
@@ -31,4 +31,3 @@
     "typescript": "^5.7.3"
   }
 }
-

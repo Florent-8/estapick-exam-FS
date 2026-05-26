@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { CreateListingDto } from "./dto/create-listing.dto";
 import { ListingsQueryDto } from "./dto/listings-query.dto";
 import { Listing, PaginatedListings } from "./listing.types";
 import { ListingsRepository } from "./listings.repository";
@@ -20,5 +21,8 @@ export class ListingsService {
 
     return listing;
   }
-}
 
+  create(payload: CreateListingDto): Listing {
+    return this.listingsRepository.create(payload);
+  }
+}

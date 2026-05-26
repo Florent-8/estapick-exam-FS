@@ -1,5 +1,5 @@
 import { Transform, Type } from "class-transformer";
-import { IsInt, IsOptional, IsString, Max, Min } from "class-validator";
+import { IsInt, IsNumber, IsOptional, IsString, Max, Min } from "class-validator";
 
 export class ListingsQueryDto {
   @IsOptional()
@@ -37,6 +37,34 @@ export class ListingsQueryDto {
 
   @IsOptional()
   @Type(() => Number)
+  @IsNumber()
+  @Min(-90)
+  @Max(90)
+  minLat?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(-90)
+  @Max(90)
+  maxLat?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(-180)
+  @Max(180)
+  minLng?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(-180)
+  @Max(180)
+  maxLng?: number;
+
+  @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   page = 1;
@@ -48,4 +76,3 @@ export class ListingsQueryDto {
   @Max(50)
   limit = 12;
 }
-

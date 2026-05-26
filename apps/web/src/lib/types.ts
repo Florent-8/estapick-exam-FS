@@ -38,5 +38,5 @@ export type ListingFilters = {
   maxPrice?: string;
   bedrooms?: string;
   bathrooms?: string;
+  selected?: string;
 };
-

@@ -4,8 +4,10 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
 export async function getListings(filters: ListingFilters = {}): Promise<ListingsResponse> {
   const search = new URLSearchParams();
+  const apiFilterKeys = ["city", "type", "minPrice", "maxPrice", "bedrooms", "bathrooms"] as const;
 
-  Object.entries(filters).forEach(([key, value]) => {
+  apiFilterKeys.forEach((key) => {
+    const value = filters[key];
     if (value) search.set(key, value);
   });
 
@@ -31,4 +33,3 @@ export async function getListing(id: string): Promise<Listing> {
 
   return response.json();
 }
-

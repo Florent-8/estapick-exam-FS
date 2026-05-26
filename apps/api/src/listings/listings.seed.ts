@@ -1,5 +1,21 @@
 import { Listing } from "./listing.types";
 
+const apartmentImages = [
+  "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
+];
+
+const houseImages = [
+  "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1200&q=80"
+];
+
+const villaImages = [
+  "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+];
+
 export const listingsSeed: Listing[] = [
   {
     id: "prop-001",
@@ -13,14 +29,9 @@ export const listingsSeed: Listing[] = [
     type: "apartment",
     latitude: 41.317,
     longitude: 19.806,
-    images: [
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-    ],
+    images: apartmentImages,
     createdAt: "2026-05-18T09:00:00.000Z",
-    description:
-      "Bright two-bedroom apartment with a renovated kitchen, leafy balcony, and quick access to cafes, schools, and Unaza.",
+    description: "Bright two-bedroom apartment with a renovated kitchen, leafy balcony, and quick access to cafes.",
     amenities: ["Balcony", "Elevator", "Renovated kitchen", "South-facing"]
   },
   {
@@ -35,13 +46,9 @@ export const listingsSeed: Listing[] = [
     type: "studio",
     latitude: 41.3308,
     longitude: 19.8253,
-    images: [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
-    ],
+    images: apartmentImages.slice(1),
     createdAt: "2026-05-17T12:20:00.000Z",
-    description:
-      "Compact city studio designed for short commutes, with practical storage and a warm interior palette.",
+    description: "Compact city studio designed for short commutes, with practical storage and warm finishes.",
     amenities: ["Furnished", "Air conditioning", "Walkable location"]
   },
   {
@@ -56,13 +63,9 @@ export const listingsSeed: Listing[] = [
     type: "house",
     latitude: 41.3221,
     longitude: 19.4557,
-    images: [
-      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1200&q=80"
-    ],
+    images: houseImages,
     createdAt: "2026-05-16T15:30:00.000Z",
-    description:
-      "Detached home with a shaded courtyard, secure parking, and flexible rooms for a growing family.",
+    description: "Detached home with a shaded courtyard, secure parking, and flexible rooms for a growing family.",
     amenities: ["Private parking", "Courtyard", "Storage", "Two floors"]
   },
   {
@@ -77,13 +80,9 @@ export const listingsSeed: Listing[] = [
     type: "villa",
     latitude: 40.438,
     longitude: 19.495,
-    images: [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
-    ],
+    images: villaImages,
     createdAt: "2026-05-14T10:10:00.000Z",
-    description:
-      "Elevated villa with full Adriatic views, generous terraces, and an open living area for hosting.",
+    description: "Elevated villa with full Adriatic views, generous terraces, and an open living area for hosting.",
     amenities: ["Sea view", "Terrace", "Garage", "Fireplace"]
   },
   {
@@ -98,13 +97,9 @@ export const listingsSeed: Listing[] = [
     type: "townhouse",
     latitude: 41.3126,
     longitude: 19.8165,
-    images: [
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80"
-    ],
+    images: houseImages,
     createdAt: "2026-05-12T08:30:00.000Z",
-    description:
-      "Quiet townhouse with split-level living, a small patio, and fast access to the lake park.",
+    description: "Quiet townhouse with split-level living, a small patio, and fast access to the lake park.",
     amenities: ["Patio", "Park access", "Dedicated parking", "Laundry room"]
   },
   {
@@ -119,14 +114,213 @@ export const listingsSeed: Listing[] = [
     type: "apartment",
     latitude: 41.3209,
     longitude: 19.8186,
-    images: [
-      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80"
-    ],
+    images: apartmentImages,
     createdAt: "2026-05-10T11:45:00.000Z",
-    description:
-      "Well-finished apartment in one of Tirana's most active neighborhoods, with two full bathrooms and city views.",
+    description: "Well-finished apartment in one of Tirana's most active neighborhoods, with two full bathrooms.",
     amenities: ["City view", "Elevator", "Security", "Central heating"]
+  },
+  {
+    id: "prop-007",
+    title: "New-build apartment near Selvia",
+    city: "Tirana",
+    address: "Rruga e Dibres",
+    price: 134000,
+    bedrooms: 2,
+    bathrooms: 1,
+    area: 78,
+    type: "apartment",
+    latitude: 41.3352,
+    longitude: 19.8231,
+    images: apartmentImages,
+    createdAt: "2026-05-09T10:00:00.000Z",
+    description: "Freshly completed apartment with efficient layout and quick access to central Tirana.",
+    amenities: ["Elevator", "New building", "Thermal insulation"]
+  },
+  {
+    id: "prop-008",
+    title: "Penthouse with city terrace",
+    city: "Tirana",
+    address: "Rruga Myslym Shyri",
+    price: 310000,
+    bedrooms: 3,
+    bathrooms: 2,
+    area: 142,
+    type: "apartment",
+    latitude: 41.3247,
+    longitude: 19.8097,
+    images: apartmentImages,
+    createdAt: "2026-05-08T14:20:00.000Z",
+    description: "Top-floor home with a wide terrace, open living space, and skyline views.",
+    amenities: ["Terrace", "Top floor", "City view", "Parking option"]
+  },
+  {
+    id: "prop-009",
+    title: "Quiet studio near Student City",
+    city: "Tirana",
+    address: "Qyteti Studenti",
+    price: 61000,
+    bedrooms: 0,
+    bathrooms: 1,
+    area: 36,
+    type: "studio",
+    latitude: 41.3182,
+    longitude: 19.8371,
+    images: apartmentImages.slice(1),
+    createdAt: "2026-05-07T09:10:00.000Z",
+    description: "Low-maintenance studio close to universities, transit, and daily services.",
+    amenities: ["Furnished", "Low maintenance", "Transit nearby"]
+  },
+  {
+    id: "prop-010",
+    title: "Beachside apartment in Durres",
+    city: "Durres",
+    address: "Plazh Durres",
+    price: 128000,
+    bedrooms: 2,
+    bathrooms: 1,
+    area: 82,
+    type: "apartment",
+    latitude: 41.3044,
+    longitude: 19.4872,
+    images: apartmentImages,
+    createdAt: "2026-05-06T13:00:00.000Z",
+    description: "Two-bedroom apartment steps from the beach promenade with rental potential.",
+    amenities: ["Beach access", "Balcony", "Rental friendly"]
+  },
+  {
+    id: "prop-011",
+    title: "Renovated Durres townhouse",
+    city: "Durres",
+    address: "Lagjja 13",
+    price: 152000,
+    bedrooms: 3,
+    bathrooms: 2,
+    area: 132,
+    type: "townhouse",
+    latitude: 41.3118,
+    longitude: 19.4746,
+    images: houseImages,
+    createdAt: "2026-05-05T08:45:00.000Z",
+    description: "Renovated townhouse with a private entry, storage, and practical family layout.",
+    amenities: ["Private entry", "Storage", "Renovated"]
+  },
+  {
+    id: "prop-012",
+    title: "Harbor-view Durres flat",
+    city: "Durres",
+    address: "Rruga Taulantia",
+    price: 186000,
+    bedrooms: 2,
+    bathrooms: 2,
+    area: 101,
+    type: "apartment",
+    latitude: 41.3136,
+    longitude: 19.4418,
+    images: apartmentImages,
+    createdAt: "2026-05-04T16:25:00.000Z",
+    description: "Spacious apartment facing the harbor with two bathrooms and a generous living room.",
+    amenities: ["Harbor view", "Elevator", "Large living room"]
+  },
+  {
+    id: "prop-013",
+    title: "Suburban Durres house",
+    city: "Durres",
+    address: "Spitalle",
+    price: 139000,
+    bedrooms: 3,
+    bathrooms: 1,
+    area: 140,
+    type: "house",
+    latitude: 41.3448,
+    longitude: 19.4689,
+    images: houseImages,
+    createdAt: "2026-05-03T12:00:00.000Z",
+    description: "Single-family house with outdoor space and easy access to the highway.",
+    amenities: ["Garden", "Parking", "Highway access"]
+  },
+  {
+    id: "prop-014",
+    title: "Vlore promenade apartment",
+    city: "Vlore",
+    address: "Lungomare",
+    price: 176000,
+    bedrooms: 2,
+    bathrooms: 1,
+    area: 88,
+    type: "apartment",
+    latitude: 40.4524,
+    longitude: 19.4898,
+    images: apartmentImages,
+    createdAt: "2026-05-02T17:40:00.000Z",
+    description: "Walkable apartment near Lungomare with sea breeze and strong seasonal rental demand.",
+    amenities: ["Promenade access", "Balcony", "Sea breeze"]
+  },
+  {
+    id: "prop-015",
+    title: "Hillside villa above Vlore",
+    city: "Vlore",
+    address: "Kaninë",
+    price: 365000,
+    bedrooms: 4,
+    bathrooms: 3,
+    area: 238,
+    type: "villa",
+    latitude: 40.4446,
+    longitude: 19.5277,
+    images: villaImages,
+    createdAt: "2026-05-01T11:15:00.000Z",
+    description: "Private hillside villa with terraces, garden space, and panoramic views.",
+    amenities: ["Panoramic view", "Garden", "Terraces", "Garage"]
+  },
+  {
+    id: "prop-016",
+    title: "Compact Vlore studio",
+    city: "Vlore",
+    address: "Skela",
+    price: 68000,
+    bedrooms: 0,
+    bathrooms: 1,
+    area: 40,
+    type: "studio",
+    latitude: 40.4629,
+    longitude: 19.4914,
+    images: apartmentImages.slice(1),
+    createdAt: "2026-04-30T09:35:00.000Z",
+    description: "Practical studio close to shops, transit, and the waterfront.",
+    amenities: ["Furnished", "Transit nearby", "Waterfront nearby"]
+  },
+  {
+    id: "prop-017",
+    title: "Vlore family house with garden",
+    city: "Vlore",
+    address: "Rruga Kosova",
+    price: 212000,
+    bedrooms: 3,
+    bathrooms: 2,
+    area: 168,
+    type: "house",
+    latitude: 40.4695,
+    longitude: 19.4856,
+    images: houseImages,
+    createdAt: "2026-04-29T15:05:00.000Z",
+    description: "Garden home with flexible room use, secure parking, and a calm residential setting.",
+    amenities: ["Garden", "Secure parking", "Storage"]
+  },
+  {
+    id: "prop-018",
+    title: "Coastal townhouse in Radhime",
+    city: "Vlore",
+    address: "Radhime",
+    price: 248000,
+    bedrooms: 3,
+    bathrooms: 2,
+    area: 150,
+    type: "townhouse",
+    latitude: 40.3702,
+    longitude: 19.481,
+    images: houseImages,
+    createdAt: "2026-04-28T10:55:00.000Z",
+    description: "Townhouse close to the coast with outdoor dining space and sea-facing rooms.",
+    amenities: ["Sea-facing", "Outdoor dining", "Parking"]
   }
 ];
-
