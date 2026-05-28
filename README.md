@@ -135,13 +135,6 @@ npm run build
 - Authentication, ownership, favorites, reviews, and image upload are intentionally out of scope.
 - Filtering is exact-match for city/type and range-based for price/bed/bath; there is no full-text search.
 
-## What I Would Build Next
-
-- Replace the in-memory repository with Postgres and Prisma migrations.
-- Add Swagger/OpenAPI docs at `/docs`.
-- Add integration tests for the HTTP layer with Supertest.
-- Add marker clustering and a richer geocoding/search experience if the scope expands.
-- Add form UI for creating listings from the frontend.
 
 ## AI Usage
 
