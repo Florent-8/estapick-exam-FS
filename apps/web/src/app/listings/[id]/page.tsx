@@ -27,7 +27,9 @@ export default async function ListingDetail({ params }: ListingDetailProps) {
             <MapPin size={16} />
             {listing.address}, {listing.city}
           </p>
-          <strong className="detail-price">{formatCurrency(listing.price)}</strong>
+          <strong className="detail-price">
+            {formatCurrency(listing.price)}
+          </strong>
           <div className="detail-facts">
             <span>
               <BedDouble size={18} />
@@ -48,13 +50,26 @@ export default async function ListingDetail({ params }: ListingDetailProps) {
               <span key={amenity}>{amenity}</span>
             ))}
           </div>
-          <div className="detail-map">
-            <MapPin size={22} />
-            <div>
-              <strong>Location</strong>
-              <span>
+          <div className="detail-location-panel">
+            <div className="detail-location-panel__header">
+              <div>
+                <strong>Location</strong>
+                <span>
+                  {listing.address}, {listing.city}
+                </span>
+              </div>
+              <p>
+                <MapPin size={16} />
                 {listing.latitude.toFixed(4)}, {listing.longitude.toFixed(4)}
-              </span>
+              </p>
+            </div>
+            <div className="detail-location-map">
+              <iframe
+                title={`${listing.title} location map`}
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${(listing.longitude - 0.012).toFixed(6)}%2C${(listing.latitude - 0.008).toFixed(6)}%2C${(listing.longitude + 0.012).toFixed(6)}%2C${(listing.latitude + 0.008).toFixed(6)}&layer=mapnik&marker=${listing.latitude}%2C${listing.longitude}`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </section>
