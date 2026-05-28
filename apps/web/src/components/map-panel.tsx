@@ -119,36 +119,38 @@ export function MapPanel({ listings, selectedId }: MapPanelProps) {
 
   return (
     <section className="map-panel" aria-label="Listing locations">
-      <MapContainer
-        center={center as [number, number]}
-        zoom={13}
-        style={{ height: "100vh", width: "100%" }}
-        whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <MapEvents onBBox={handleBBox} />
-        {listings.map((listing) => (
-          <Marker
-            key={listing.id}
-            position={[listing.latitude, listing.longitude]}
-            eventHandlers={{
-              click: () =>
-                handleMarkerClick(
-                  listing.id,
-                  listing.latitude,
-                  listing.longitude,
-                ),
-            }}
-          >
-            <Popup>
-              <strong>{listing.title}</strong>
-              <div>
-                {listing.address}, {listing.city}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
+      <div className="map-panel__frame">
+        <MapContainer
+          center={center as [number, number]}
+          zoom={13}
+          style={{ height: "100%", width: "100%" }}
+          whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <MapEvents onBBox={handleBBox} />
+          {listings.map((listing) => (
+            <Marker
+              key={listing.id}
+              position={[listing.latitude, listing.longitude]}
+              eventHandlers={{
+                click: () =>
+                  handleMarkerClick(
+                    listing.id,
+                    listing.latitude,
+                    listing.longitude,
+                  ),
+              }}
+            >
+              <Popup>
+                <strong>{listing.title}</strong>
+                <div>
+                  {listing.address}, {listing.city}
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </div>
     </section>
   );
 }

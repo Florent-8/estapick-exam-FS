@@ -1,11 +1,23 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { ListingSummary, ListingsResponse, ListingFilters } from "@/lib/types";
 import { ListingCard } from "./listing-card";
 import { getListings } from "@/lib/api";
-import { MapPanel } from "./map-panel";
 import { useSearchParams } from "next/navigation";
+
+const MapPanel = dynamic(
+  () => import("./map-panel").then((mod) => mod.MapPanel),
+  {
+    ssr: false,
+    loading: () => (
+      <section className="map-panel" aria-label="Listing locations">
+        <div style={{ padding: 24 }}>Loading map…</div>
+      </section>
+    ),
+  },
+);
 
 type Props = {
   initial: ListingsResponse;

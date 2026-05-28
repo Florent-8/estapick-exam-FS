@@ -2,7 +2,6 @@
 
 import { Bath, BedDouble, Home, MapPin, Ruler } from "lucide-react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
 import { formatCurrency, formatType } from "@/lib/format";
 import { ListingSummary } from "@/lib/types";
 
@@ -12,23 +11,9 @@ type ListingCardProps = {
 };
 
 export function ListingCard({ listing, selected = false }: ListingCardProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const handleSelect = () => {
-    const params = new URLSearchParams(Array.from(searchParams.entries()));
-    params.set("selected", listing.id);
-    router.push(`/?${params.toString()}`);
-  };
-
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={handleSelect}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") handleSelect();
-      }}
+    <Link
+      href={`/listings/${listing.id}`}
       className={`listing-card ${selected ? "is-selected" : ""}`}
     >
       <div
@@ -64,14 +49,9 @@ export function ListingCard({ listing, selected = false }: ListingCardProps) {
           </span>
         </div>
         <div style={{ marginTop: 8 }}>
-          <Link
-            href={`/listings/${listing.id}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            View details
-          </Link>
+          <span className="listing-card__details">View details</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
