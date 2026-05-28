@@ -1,6 +1,6 @@
 # Estapick Property Listings
 
-Full-stack take-home assignment for a property marketplace. The backend is a NestJS API and the frontend is a Next.js app with list/detail browsing, filters, a lightweight map panel, and an image carousel.
+Full-stack take-home assignment for a property marketplace. The backend is a NestJS API and the frontend is a Next.js app with list/detail browsing, filters, real map views, and an image carousel.
 
 ## Tech Choices
 
@@ -115,7 +115,8 @@ npm run build
 
 ## Notes
 
-- The map is implemented as a lightweight static panel with clickable pins rather than a third-party map SDK. This avoids API keys while still showing the intended split-view workflow.
+- The listing page uses a real Leaflet map with bbox syncing, clickable markers, and list/detail selection state.
+- The property detail page uses an embedded OpenStreetMap view for the listing location.
 - Listing images use remote Unsplash URLs in CSS backgrounds, so no Next image domain configuration is needed.
 - The SQLite database is created automatically at `apps/api/data/estapick.sqlite` when the backend starts.
 - The database seeds 18 mock listings across Tirana, Durres, and Vlore, with realistic-ish coordinates.
@@ -130,7 +131,7 @@ npm run build
 ## Limitations
 
 - SQLite data is local to the generated database file, so it is suitable for local review but not production deployment.
-- The map is a static visual approximation with clickable pins, not a real geographic SDK.
+- The listing map uses Leaflet and OpenStreetMap tiles, but it is still focused on browsing rather than turn-by-turn navigation or geocoding.
 - Authentication, ownership, favorites, reviews, and image upload are intentionally out of scope.
 - Filtering is exact-match for city/type and range-based for price/bed/bath; there is no full-text search.
 
@@ -139,7 +140,7 @@ npm run build
 - Replace the in-memory repository with Postgres and Prisma migrations.
 - Add Swagger/OpenAPI docs at `/docs`.
 - Add integration tests for the HTTP layer with Supertest.
-- Use a real map provider such as Leaflet or MapLibre and cluster markers.
+- Add marker clustering and a richer geocoding/search experience if the scope expands.
 - Add form UI for creating listings from the frontend.
 
 ## AI Usage
