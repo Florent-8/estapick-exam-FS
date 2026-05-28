@@ -17,6 +17,8 @@ export async function getListings(
     "maxLat",
     "minLng",
     "maxLng",
+    "page",
+    "limit",
   ] as const;
 
   apiFilterKeys.forEach((key) => {

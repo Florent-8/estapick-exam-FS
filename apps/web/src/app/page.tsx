@@ -1,8 +1,7 @@
 import { FilterBar } from "@/components/filter-bar";
-import { ListingCard } from "@/components/listing-card";
-import { MapPanel } from "@/components/map-panel";
 import { getListings } from "@/lib/api";
 import { ListingFilters } from "@/lib/types";
+import { ListingsAndMap } from "@/components/listings-and-map";
 
 type HomeProps = {
   searchParams: Promise<ListingFilters>;
@@ -14,22 +13,15 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <main className="app-shell">
-      <section className="results-pane">
-        <header className="page-header">
-          <div>
-            <p>Estapick</p>
-            <h1>Property listings</h1>
-          </div>
-          <span>{listings.meta.total} homes</span>
-        </header>
-        <FilterBar filters={filters} />
-        <div className="listing-list">
-          {listings.data.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} selected={filters.selected === listing.id} />
-          ))}
+      <header className="page-header">
+        <div>
+          <p>Estapick</p>
+          <h1>Property listings</h1>
         </div>
-      </section>
-      <MapPanel listings={listings.data} selectedId={filters.selected} />
+        <span>{listings.meta.total} homes</span>
+      </header>
+      <FilterBar filters={filters} />
+      <ListingsAndMap initial={listings} filters={filters} />
     </main>
   );
 }

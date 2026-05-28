@@ -48,4 +48,6 @@ export type ListingFilters = {
   minLng?: string;
   maxLng?: string;
   selected?: string;
+  page?: string;
+  limit?: string;
 };
