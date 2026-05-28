@@ -141,7 +141,3 @@ npm run build
 I used AI assistance to scaffold the monorepo, translate the assignment requirements into a task plan, generate the first pass of the NestJS modules and Next.js components, and review the result against the checklist. The useful parts were quick boilerplate generation, test coverage suggestions, and spotting missing assignment items like loading/error states and README notes.
 
 I manually reviewed and adjusted the generated code, fixed package/version issues, chose the simplified map approach, verified the API and frontend builds, and split the finished work into realistic commits.
-
-## Time Spent
-
-Approximately 4-5 hours including setup, implementation, verification, README work, and commit cleanup.
