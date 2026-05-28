@@ -119,7 +119,7 @@ npm run build
 - The property detail page uses an embedded OpenStreetMap view for the listing location.
 - Listing images use remote Unsplash URLs in CSS backgrounds, so no Next image domain configuration is needed.
 - The SQLite database is created automatically at `apps/api/data/estapick.sqlite` when the backend starts.
-- The database seeds 18 mock listings across Tirana, Durres, and Vlore, with realistic-ish coordinates.
+- The database seeds mock listings, with realistic-ish coordinates.
 
 ## Frontend Rendering Decisions
 
