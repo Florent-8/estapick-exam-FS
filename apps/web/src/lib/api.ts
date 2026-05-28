@@ -2,18 +2,34 @@ import { Listing, ListingFilters, ListingsResponse } from "./types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
 
-export async function getListings(filters: ListingFilters = {}): Promise<ListingsResponse> {
+export async function getListings(
+  filters: ListingFilters = {},
+): Promise<ListingsResponse> {
   const search = new URLSearchParams();
-  const apiFilterKeys = ["city", "type", "minPrice", "maxPrice", "bedrooms", "bathrooms"] as const;
+  const apiFilterKeys = [
+    "city",
+    "type",
+    "minPrice",
+    "maxPrice",
+    "bedrooms",
+    "bathrooms",
+    "minLat",
+    "maxLat",
+    "minLng",
+    "maxLng",
+  ] as const;
 
   apiFilterKeys.forEach((key) => {
-    const value = filters[key];
-    if (value) search.set(key, value);
+    const value = filters[key as keyof typeof filters];
+    if (value !== undefined && value !== "") search.set(key, String(value));
   });
 
-  const response = await fetch(`${API_BASE_URL}/listings?${search.toString()}`, {
-    cache: "no-store"
-  });
+  const response = await fetch(
+    `${API_BASE_URL}/listings?${search.toString()}`,
+    {
+      cache: "no-store",
+    },
+  );
 
   if (!response.ok) {
     throw new Error("Unable to load listings");
@@ -24,7 +40,7 @@ export async function getListings(filters: ListingFilters = {}): Promise<Listing
 
 export async function getListing(id: string): Promise<Listing> {
   const response = await fetch(`${API_BASE_URL}/listings/${id}`, {
-    cache: "no-store"
+    cache: "no-store",
   });
 
   if (!response.ok) {
