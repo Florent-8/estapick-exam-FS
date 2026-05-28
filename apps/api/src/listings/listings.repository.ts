@@ -35,12 +35,16 @@ export class ListingsRepository {
     const limit = query.limit ?? 12;
     const { where, params } = this.buildWhereClause(query);
 
-    const countRow = this.db.prepare(`SELECT COUNT(*) as total FROM listings ${where}`).get(...params) as {
+    const countRow = this.db
+      .prepare(`SELECT COUNT(*) as total FROM listings ${where}`)
+      .get(...params) as {
       total: number;
     };
     const start = (page - 1) * limit;
     const rows = this.db
-      .prepare(`SELECT * FROM listings ${where} ORDER BY createdAt DESC LIMIT ? OFFSET ?`)
+      .prepare(
+        `SELECT * FROM listings ${where} ORDER BY createdAt DESC LIMIT ? OFFSET ?`,
+      )
       .all(...params, limit, start) as ListingRow[];
     const data = rows.map(fromRow).map(toSummary);
 
@@ -50,13 +54,15 @@ export class ListingsRepository {
         total: countRow.total,
         page,
         limit,
-        totalPages: Math.max(1, Math.ceil(countRow.total / limit))
-      }
+        totalPages: Math.max(1, Math.ceil(countRow.total / limit)),
+      },
     };
   }
 
   findById(id: string): Listing | undefined {
-    const row = this.db.prepare("SELECT * FROM listings WHERE id = ?").get(id) as ListingRow | undefined;
+    const row = this.db
+      .prepare("SELECT * FROM listings WHERE id = ?")
+      .get(id) as ListingRow | undefined;
     return row ? fromRow(row) : undefined;
   }
 
@@ -65,7 +71,7 @@ export class ListingsRepository {
       ...payload,
       id: this.nextId(),
       createdAt: payload.createdAt ?? new Date().toISOString(),
-      amenities: payload.amenities ?? []
+      amenities: payload.amenities ?? [],
     };
 
     this.insertListing(listing);
@@ -97,13 +103,18 @@ export class ListingsRepository {
       CREATE INDEX IF NOT EXISTS idx_listings_location ON listings(latitude, longitude);
     `);
 
-    const row = this.db.prepare("SELECT COUNT(*) as total FROM listings").get() as { total: number };
+    const row = this.db
+      .prepare("SELECT COUNT(*) as total FROM listings")
+      .get() as { total: number };
     if (row.total === 0) {
       listingsSeed.forEach((listing) => this.insertListing(listing));
     }
   }
 
-  private buildWhereClause(query: ListingsQueryDto): { where: string; params: unknown[] } {
+  private buildWhereClause(query: ListingsQueryDto): {
+    where: string;
+    params: unknown[];
+  } {
     const clauses: string[] = [];
     const params: unknown[] = [];
 
@@ -124,7 +135,8 @@ export class ListingsRepository {
       params.push(query.maxPrice);
     }
     if (query.bedrooms !== undefined) {
-      clauses.push("bedrooms >= ?");
+      // bedrooms should be an exact match per assignment requirements
+      clauses.push("bedrooms = ?");
       params.push(query.bedrooms);
     }
     if (query.bathrooms !== undefined) {
@@ -150,7 +162,7 @@ export class ListingsRepository {
 
     return {
       where: clauses.length > 0 ? `WHERE ${clauses.join(" AND ")}` : "",
-      params
+      params,
     };
   }
 
@@ -160,7 +172,7 @@ export class ListingsRepository {
         `INSERT INTO listings (
           id, title, city, address, price, bedrooms, bathrooms, area, type,
           latitude, longitude, images, createdAt, description, amenities
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       )
       .run(
         listing.id,
@@ -177,12 +189,14 @@ export class ListingsRepository {
         JSON.stringify(listing.images),
         listing.createdAt,
         listing.description,
-        JSON.stringify(listing.amenities)
+        JSON.stringify(listing.amenities),
       );
   }
 
   private nextId(): string {
-    const row = this.db.prepare("SELECT COUNT(*) as total FROM listings").get() as { total: number };
+    const row = this.db
+      .prepare("SELECT COUNT(*) as total FROM listings")
+      .get() as { total: number };
     return `prop-${String(row.total + 1).padStart(3, "0")}`;
   }
 }
@@ -191,11 +205,15 @@ function fromRow(row: ListingRow): Listing {
   return {
     ...row,
     images: JSON.parse(row.images) as string[],
-    amenities: JSON.parse(row.amenities) as string[]
+    amenities: JSON.parse(row.amenities) as string[],
   };
 }
 
 function toSummary(listing: Listing): ListingSummary {
-  const { description: _description, amenities: _amenities, ...summary } = listing;
+  const {
+    description: _description,
+    amenities: _amenities,
+    ...summary
+  } = listing;
   return summary;
 }
