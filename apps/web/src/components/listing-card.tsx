@@ -1,5 +1,8 @@
+"use client";
+
 import { Bath, BedDouble, Home, MapPin, Ruler } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { formatCurrency, formatType } from "@/lib/format";
 import { ListingSummary } from "@/lib/types";
 
@@ -9,9 +12,29 @@ type ListingCardProps = {
 };
 
 export function ListingCard({ listing, selected = false }: ListingCardProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleSelect = () => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    params.set("selected", listing.id);
+    router.push(`/?${params.toString()}`);
+  };
+
   return (
-    <Link className={`listing-card ${selected ? "is-selected" : ""}`} href={`/listings/${listing.id}`}>
-      <div className="listing-card__image" style={{ backgroundImage: `url(${listing.images[0]})` }} />
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={handleSelect}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") handleSelect();
+      }}
+      className={`listing-card ${selected ? "is-selected" : ""}`}
+    >
+      <div
+        className="listing-card__image"
+        style={{ backgroundImage: `url(${listing.images[0]})` }}
+      />
       <div className="listing-card__body">
         <div className="listing-card__topline">
           <span>{formatType(listing.type)}</span>
@@ -40,8 +63,15 @@ export function ListingCard({ listing, selected = false }: ListingCardProps) {
             {formatType(listing.type)}
           </span>
         </div>
+        <div style={{ marginTop: 8 }}>
+          <Link
+            href={`/listings/${listing.id}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            View details
+          </Link>
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }
-
