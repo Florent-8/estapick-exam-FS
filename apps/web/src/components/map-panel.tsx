@@ -93,6 +93,30 @@ export function MapPanel({ listings, selectedId }: MapPanelProps) {
     router.push(`/?${params.toString()}`);
   };
 
+  const handleMarkerClick = (id: string, lat: number, lng: number) => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    params.set("selected", id);
+    router.push(`/?${params.toString()}`);
+    if (mapRef.current) mapRef.current.setView([lat, lng], 15);
+  };
+
+  useEffect(() => {
+    if (!selectedId || !mapRef.current) return;
+    const target = listings.find((l) => l.id === selectedId);
+    if (!target) return;
+    try {
+      mapRef.current.setView([target.latitude, target.longitude], 15);
+      L.popup({ maxWidth: 320 })
+        .setLatLng([target.latitude, target.longitude])
+        .setContent(
+          `<strong>${target.title}</strong><div>${target.address}, ${target.city}</div>`,
+        )
+        .openOn(mapRef.current);
+    } catch (e) {
+      // ignore
+    }
+  }, [selectedId, listings]);
+
   return (
     <section className="map-panel" aria-label="Listing locations">
       <MapContainer
@@ -107,6 +131,14 @@ export function MapPanel({ listings, selectedId }: MapPanelProps) {
           <Marker
             key={listing.id}
             position={[listing.latitude, listing.longitude]}
+            eventHandlers={{
+              click: () =>
+                handleMarkerClick(
+                  listing.id,
+                  listing.latitude,
+                  listing.longitude,
+                ),
+            }}
           >
             <Popup>
               <strong>{listing.title}</strong>

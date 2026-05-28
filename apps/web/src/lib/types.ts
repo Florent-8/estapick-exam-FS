@@ -1,4 +1,9 @@
-export type PropertyType = "apartment" | "house" | "townhouse" | "villa" | "studio";
+export type PropertyType =
+  | "apartment"
+  | "house"
+  | "townhouse"
+  | "villa"
+  | "studio";
 
 export type ListingSummary = {
   id: string;
@@ -38,5 +43,9 @@ export type ListingFilters = {
   maxPrice?: string;
   bedrooms?: string;
   bathrooms?: string;
+  minLat?: string;
+  maxLat?: string;
+  minLng?: string;
+  maxLng?: string;
   selected?: string;
 };
