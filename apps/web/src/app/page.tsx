@@ -13,15 +13,21 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <main className="app-shell">
-      <header className="page-header">
-        <div>
-          <p>Estapick</p>
-          <h1>Property listings</h1>
+      <section className="hero-panel">
+        <header className="page-header">
+          <div>
+            <p>Estapick</p>
+            <h1>Property listings</h1>
+          </div>
+          <span>{listings.meta.total} homes</span>
+        </header>
+        <div className="hero-panel__filters">
+          <FilterBar filters={filters} />
         </div>
-        <span>{listings.meta.total} homes</span>
-      </header>
-      <FilterBar filters={filters} />
-      <ListingsAndMap initial={listings} filters={filters} />
+      </section>
+      <section className="content-shell">
+        <ListingsAndMap initial={listings} filters={filters} />
+      </section>
     </main>
   );
 }
