@@ -45,7 +45,9 @@ function MapEvents({
     };
 
     map.on("moveend", handle);
-    return () => map.off("moveend", handle);
+    return () => {
+      map.off("moveend", handle);
+    };
   }, [map, onBBox]);
 
   return null;
@@ -54,7 +56,7 @@ function MapEvents({
 export function MapPanel({ listings, selectedId }: MapPanelProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const mapRef = useRef<any>(null);
+  const mapRef = useRef<L.Map | null>(null);
 
   const center = useMemo(() => {
     if (listings.length === 0) return [41.32, 19.8];
@@ -124,7 +126,7 @@ export function MapPanel({ listings, selectedId }: MapPanelProps) {
           center={center as [number, number]}
           zoom={13}
           style={{ height: "100%", width: "100%" }}
-          whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
+          ref={mapRef}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           <MapEvents onBBox={handleBBox} />

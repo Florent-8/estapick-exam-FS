@@ -77,6 +77,14 @@ Install dependencies once:
 npm install
 ```
 
+On Windows PowerShell, if `npm` is blocked by the local execution policy, use `npm.cmd` for the same commands:
+
+```powershell
+npm.cmd install
+npm.cmd run dev:api
+npm.cmd run dev:web
+```
+
 Run the backend:
 
 ```bash
@@ -105,6 +113,8 @@ On PowerShell:
 ```powershell
 $env:NEXT_PUBLIC_API_URL="http://localhost:3001"; npm run dev:web
 ```
+
+If the frontend shows a missing Next.js runtime chunk after a local reinstall, remove `node_modules`, run `npm install` again, and restart the dev server. The project is pinned to the Next.js 13 line used by the submitted app.
 
 ## Checks
 
